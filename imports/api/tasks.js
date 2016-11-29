@@ -6,7 +6,7 @@ export const Tasks = new Mongo.Collection('tasks');
 
 Meteor.methods({
     'tasks.insert'(text) {
-        check(text, string);
+        check(text, String);
 
         //Make sure the user is Logged in before inserting a task
         if(! this.userId) {
@@ -14,7 +14,7 @@ Meteor.methods({
         }
 
         Tasks.insert({
-            text,
+            text: text,
             createdAt: new Date(),
             owner: this.userId,
             username: Meteor.users.findOne(this.userId).username,
